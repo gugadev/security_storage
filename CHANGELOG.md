@@ -1,3 +1,5 @@
+## 1.1.0
+* Feature iOS and more features to android 
 ## 1.0.1
 * Fix error when fingeprints is empty
 
