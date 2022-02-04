@@ -1,9 +1,7 @@
 import 'dart:async';
 import 'dart:io';
-
 import 'package:flutter/services.dart';
 import 'package:logging/logging.dart';
-
 import 'package:encrypt/encrypt.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
@@ -19,7 +17,7 @@ enum CanAuthenticateResponse {
   deniedPermission,
 }
 
-const _canAuthenticateMapping = {
+const Map<String, CanAuthenticateResponse> _canAuthenticateMapping = {
   'Success': CanAuthenticateResponse.success,
   'ErrorHwUnavailable': CanAuthenticateResponse.errorHwUnavailable,
   'ErrorNoBiometricEnrolled': CanAuthenticateResponse.errorNoBiometricEnrolled,
@@ -73,13 +71,11 @@ const _authErrorCodeMapping = {
 class AndroidPromptInfo {
   const AndroidPromptInfo({
     this.title = 'Authenticate to unlock data',
-    this.subtitle,
-    this.description,
+    this.subtitle = '',
+    this.description = '',
     this.negativeButton = 'Cancel',
     this.confirmationRequired = true,
-  })  : assert(title != null),
-        assert(negativeButton != null),
-        assert(confirmationRequired != null);
+  });
 
   final String title;
   final String subtitle;
@@ -87,7 +83,7 @@ class AndroidPromptInfo {
   final String negativeButton;
   final bool confirmationRequired;
 
-  static const defaultValues = AndroidPromptInfo();
+  static const defaultValues = AndroidPromptInfo(subtitle: '', description: '');
 
   Map<String, dynamic> _toJson() => <String, dynamic>{
         'title': title,
@@ -124,26 +120,23 @@ class SecurityStorage {
   AndroidPromptInfo androidPromptInfo;
   SecurityStorage(this.name, this.androidPromptInfo);
 
-  static Future<CanAuthenticateResponse> canAuthenticate() async {
+  static Future<CanAuthenticateResponse?> canAuthenticate() async {
     if (Platform.isAndroid) {
       var result = await _channel.invokeMethod<String>('canAuthenticate');
-      print(result);
       return _canAuthenticateMapping[result];
-    }else{
+    } else {
       var result = await _channel.invokeMethod<String>('canAuthenticate');
-      print(result);
       return _canAuthenticateMapping[result];
     }
 
     //return CanAuthenticateResponse.unsupported;
   }
 
-  static Future<SecurityStorage> init(
+  static Future<SecurityStorage?> init(
     String name, {
-    StorageInitOptions options,
+    StorageInitOptions? options,
     AndroidPromptInfo androidPromptInfo = AndroidPromptInfo.defaultValues,
   }) async {
-    assert(name != null);
     try {
       _channel.invokeMethod<bool>(
         'init',
@@ -162,55 +155,56 @@ class SecurityStorage {
     }
     return null;
   }
-  // Future<String> getIconString() =>
-  //     _channel.invokeMethod<String>('getIconString');
-  static Future<String> getIconString() async {
 
+  static Future<String?> getIconString() async {
     var result = await _channel.invokeMethod<String>('getIconString');
-    print(result);
     return result;
-
   }
-  static Future<bool> isAvailableInApp()async{
+
+  static Future<bool?> isAvailableInApp() async {
     var result = await _channel.invokeMethod<bool>('isAvailableInApp');
     return result;
   }
-  static Future<bool> isAvailableBiometricBanner()async{
-    var result = await _channel.invokeMethod<bool>('isAvailableBiometricBanner');
+
+  static Future<bool?> isAvailableBiometricBanner() async {
+    var result =
+        await _channel.invokeMethod<bool>('isAvailableBiometricBanner');
     return result;
   }
 
-  static Future<CanAuthenticateResponse> getPermission() async {
+  static Future<CanAuthenticateResponse?> getPermission() async {
+    var result = await _channel.invokeMethod<String>('getPermission');
 
-      var result = await _channel.invokeMethod<String>('getPermission');
-
-      return _canAuthenticateMapping[result];
+    return _canAuthenticateMapping[result];
   }
-  Future<String> read() async {
-    final value = await _transformErrors(_channel.invokeMethod<String>('read', <String, dynamic>{
+
+  Future<String?> read() async {
+    final value = await _transformErrors(_channel.invokeMethod<String>(
+        'read', <String, dynamic>{
       'name': this.name,
       'androidPromptInfo': androidPromptInfo._toJson()
     }));
-    if(value == null || value == 'null'){
+    if (value == null || value == 'null') {
       return value;
-    }else{
-      var isNew = (value.length<=44) ? true : false;
+    } else {
+      var isNew = (value.length <= 44) ? true : false;
       SecureTokenStorage().isLastVersion = isNew;
-      if(isNew){
+      if (isNew) {
         SecureTokenStorage().Key32 = value;
         var key32 = SecureTokenStorage().Key32;
         final keyRandom = SecureTokenStorage.keyFromString(key32);
-        final token = await SecureTokenStorage.readToken(keyRandom,'token');
+        final token = await SecureTokenStorage.readToken(keyRandom, 'token');
         //return alway a randomKey or oldUser return Token Value
         return token;
-      }else{
+      } else {
         return value;
       }
-
     }
   }
+
   Future<String> write(String content) async {
-    final value = await _transformErrors(_channel.invokeMethod('write', <String, dynamic>{
+    final value =
+        await _transformErrors(_channel.invokeMethod('write', <String, dynamic>{
       'name': this.name,
       'content': content,
       'androidPromptInfo': androidPromptInfo._toJson()
@@ -218,7 +212,7 @@ class SecurityStorage {
     return value;
   }
 
-  Future<bool> delete() =>
+  Future<bool?> delete() =>
       _transformErrors(_channel.invokeMethod<bool>('delete', <String, dynamic>{
         'name': this.name,
         'androidPromptInfo': androidPromptInfo._toJson()
@@ -234,7 +228,7 @@ class SecurityStorage {
           return Future<T>.error(
             AuthException(
               _authErrorCodeMapping[error.code] ?? AuthExceptionCode.unknown,
-              error.message,
+              error.message ?? 'PlatformException',
             ),
             stackTrace,
           );
@@ -243,43 +237,51 @@ class SecurityStorage {
       });
 }
 
-
 class SecureTokenStorage {
   bool authenticationRequired = false;
   bool isLastVersion = true;
-  String Key32;//Cipher Biometric Prompt para Android TokenRefresh Enroll
+  // ignore: non_constant_identifier_names
+  var Key32; //Cipher Biometric Prompt para Android TokenRefresh Enroll
   static final SecureTokenStorage _singleton = SecureTokenStorage._internal();
+
   factory SecureTokenStorage() {
     return _singleton;
   }
+
   SecureTokenStorage._internal();
-  static Key randomValue(){
+
+  static Key randomValue() {
     return Key.fromSecureRandom(32);
   }
-  static Key keyFromString(String keyBase64){
+
+  static Key keyFromString(String keyBase64) {
     return Key.fromBase64(keyBase64);
   }
-  static String encryptToken(Key key32,String plainText){
 
+  static String encryptToken(Key key32, String plainText) {
     final iv = IV.fromLength(16);
     final encrypting = Encrypter(AES(key32));
     final encrypted = encrypting.encrypt(plainText, iv: iv);
-    return encrypted.base64 ;
+    return encrypted.base64;
   }
-  static void saveData(Key key32, String value,String keyValue) async {
-    if(key32 != null){
-      final tokenEncrypted = SecureTokenStorage.encryptToken(key32,value);
+
+  static void saveData(Key? key32, String value, String keyValue) async {
+    if (key32 != null) {
+      final tokenEncrypted = SecureTokenStorage.encryptToken(key32, value);
       final _storage = FlutterSecureStorage();
       await _storage.write(key: keyValue, value: tokenEncrypted);
     }
   }
-  static Future<String> readToken(Key key32,String keyValue) async {
+
+  static Future<String?> readToken(Key key32, String keyValue) async {
     final _storage = FlutterSecureStorage();
     var token = await _storage.read(key: keyValue);
-    final iv = IV.fromLength(16);
-    final encrypting = Encrypter(AES(key32));
-    final decrypted = encrypting.decrypt64(token,iv: iv);
-    return decrypted;
+    if (token != null) {
+      final iv = IV.fromLength(16);
+      final encrypting = Encrypter(AES(key32));
+      final decrypted = encrypting.decrypt64(token, iv: iv);
+      return decrypted;
+    }
+    return null;
   }
-
 }

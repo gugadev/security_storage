@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:security_storage/security_storage.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 void main() {
   runApp(MyApp());
@@ -12,13 +11,14 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  String _value = 'Unknown';
+  var _value = 'Unknown';
   final _formKey = GlobalKey<FormState>();
   final keyController = TextEditingController();
   final valueController = TextEditingController();
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   final securityStorages = Map<String, SecurityStorage>();
   var promptInfo;
+
   @override
   void initState() {
     super.initState();
@@ -31,7 +31,7 @@ class _MyAppState extends State<MyApp> {
 
   _displaySnackBar(BuildContext context, String message) {
     final snackBar = SnackBar(content: Text(message));
-    _scaffoldKey.currentState.showSnackBar(snackBar);
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
   @override
@@ -53,7 +53,7 @@ class _MyAppState extends State<MyApp> {
                       TextFormField(
                         controller: keyController,
                         validator: (value) {
-                          if (value.isEmpty) {
+                          if (value != null && value.isEmpty) {
                             return 'Nombre de llave';
                           }
                           return null;
@@ -62,73 +62,85 @@ class _MyAppState extends State<MyApp> {
                       TextFormField(
                         controller: valueController,
                         validator: (value) {
-                          if (value.isEmpty) {
+                          if (value != null && value.isEmpty) {
                             return 'Valor de llave';
                           }
                           return null;
                         },
                       )
                     ])),
-                RaisedButton(
+                ElevatedButton(
                   onPressed: () async {
                     var result = await SecurityStorage.canAuthenticate();
                     _displaySnackBar(context, result.toString());
                   },
                   child: Text('canAuthenticate'),
                 ),
-                RaisedButton(
+                ElevatedButton(
                   onPressed: () async {
                     if (keyController.value.text.isNotEmpty) {
                       var name = keyController.value.text;
                       var storage = await SecurityStorage.init(name,
                           androidPromptInfo: promptInfo,
                           options: StorageInitOptions());
-                      securityStorages[name] = storage;
-                      _displaySnackBar(context, 'init storage');
+                      if (storage == null) {
+                        print('No se pudo inicializar el storage');
+                      } else {
+                        securityStorages[name] = storage;
+                        _displaySnackBar(context, 'init storage');
+                      }
                     }
                   },
                   child: Text('inicializar'),
                 ),
-                RaisedButton(
+                ElevatedButton(
                   onPressed: () async {
-                    if (_formKey.currentState.validate()) {
+                    if (_formKey.currentState?.validate() == true) {
                       var name = keyController.value.text;
                       try {
-                        await securityStorages[name]
-                            .write(valueController.value.text);
+                        if (securityStorages[name] == null) {
+                          throw new Exception('No hay un almacenamiento');
+                        }
+                        await (securityStorages[name]
+                            ?.write(valueController.value.text));
                         _displaySnackBar(context, 'Guardando data');
-                      } catch (e) {
-                        print(e);
-                        _displaySnackBar(context, e.code.toString());
+                      } catch (error) {
+                        _displaySnackBar(context, error.toString());
                       }
                     }
                   },
                   child: Text('guardar'),
                 ),
-                RaisedButton(
+                ElevatedButton(
                   onPressed: () async {
                     if (keyController.value.text.isNotEmpty) {
                       var name = keyController.value.text;
                       try {
-                        var value = await securityStorages[name].read();
+                        if (securityStorages[name] == null) {
+                          throw new Exception('No hay un almacenamiento');
+                        }
+                        var value = await securityStorages[name]?.read();
                         _displaySnackBar(context, "El valor es: $value");
                       } catch (e) {
-                        _displaySnackBar(context, e.code.toString());
+                        _displaySnackBar(context, e.toString());
                       }
                     }
                   },
                   child: Text('Leer'),
                 ),
-                RaisedButton(
+                ElevatedButton(
                   onPressed: () async {
                     if (keyController.value.text.isNotEmpty) {
                       var name = keyController.value.text;
                       try {
-                        await securityStorages[name].delete();
+                        if (securityStorages[name] == null) {
+                          throw new Exception('No hay un almacenamiento');
+                        }
+                        await securityStorages[name]?.delete();
                         _displaySnackBar(
                             context, "El valor es: $name fue eliminado");
                       } catch (e) {
-                        _displaySnackBar(context, e.code.toString());
+                        _displaySnackBar(context, e.toString());
                       }
                     }
                   },
