@@ -8,3 +8,5 @@
 -keepclassmembers class * extends com.google.crypto.tink.shaded.protobuf.GeneratedMessageLite {
   <fields>;
 }
+-keep class kotlin.reflect.jvm.internal.**
+-keep class kotlin.Metadata { *; }

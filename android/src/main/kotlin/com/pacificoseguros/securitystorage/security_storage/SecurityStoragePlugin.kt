@@ -114,17 +114,21 @@ public class SecurityStoragePlugin : FlutterPlugin, MethodCallHandler, ActivityA
             "getPlatformVersion" -> result.success("test Android ${android.os.Build.VERSION.RELEASE}")
             "init" -> {
 
-                val options = moshi.adapter<InitOptions>(InitOptions::class.java)
+                try {
+                    val options = moshi.adapter<InitOptions>(InitOptions::class.java)
                         .fromJsonValue(call.argument("options") ?: emptyMap<String, Any>())
                         ?: InitOptions()
 
+                    storageItems[getName()] = StorageItem(getName(), options)
 
-                storageItems[getName()] = StorageItem(getName(), options)
+                    var prefs = PreferenceHelper.customPrefs(this.context, "security-storage")
+                    val json: String = prefs[getName()]
+                    val gson = Gson()
+                    storageItems[getName()]!!.encryptedData = gson.fromJson(json, EncryptedData::class.java)
+                } catch (e: Throwable) {
+                    Log.e(TAG, "Ocurrión un error al inicializar el storage: ${e.message}")
+                }
 
-                var prefs = PreferenceHelper.customPrefs(this.context, "security-storage")
-                val json: String = prefs[getName()]
-                val gson = Gson()
-                storageItems[getName()]!!.encryptedData = gson.fromJson(json, EncryptedData::class.java)
             }
             "write" -> {
 
@@ -435,6 +439,7 @@ public class SecurityStoragePlugin : FlutterPlugin, MethodCallHandler, ActivityA
     private fun updateAttachedActivity(activity: Activity) {
         if (activity !is FragmentActivity) {
             //logger.error { "Got attached to activity which is not a FragmentActivity: $activity" }
+            Log.e(TAG, "Got attached to activity which is not a FragmentActivity: $activity")
             return
         }
         this.activity = activity

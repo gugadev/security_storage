@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="NONE" />
+  </component>
   <component name="BranchesTreeState">
     <expand>
       <path>
@@ -19,20 +22,15 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2600a4d6-f608-408c-8001-622e5b12bcbf" name="Default Changelist" comment="(feature) modify read and write functions">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/CHANGELOG.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/ios/.symlinks/plugins/security_storage/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/.symlinks/plugins/security_storage/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/ios/.symlinks/plugins/security_storage/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/.symlinks/plugins/security_storage/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
+    <list default="true" id="2600a4d6-f608-408c-8001-622e5b12bcbf" name="Default Changelist" comment="feat(partially): migrate to v2">
+      <change beforePath="$PROJECT_DIR$/android/proguard.pro" beforeDir="false" afterPath="$PROJECT_DIR$/android/proguard.pro" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/com/pacificoseguros/securitystorage/security_storage/SecurityStoragePlugin.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/pacificoseguros/securitystorage/security_storage/SecurityStoragePlugin.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[196e6b2b]" />
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
@@ -42,6 +40,31 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="ROOT_SYNC" value="SYNC" />
   </component>
+  <component name="GitToolBoxStore">
+    <option name="recentBranches">
+      <RecentBranches>
+        <option name="branchesForRepo">
+          <list>
+            <RecentBranchesForRepo>
+              <option name="branches">
+                <list>
+                  <RecentBranch>
+                    <option name="branchName" value="feature/migrate-to-v2" />
+                    <option name="lastUsedInstant" value="1656798658" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="master" />
+                    <option name="lastUsedInstant" value="1656798657" />
+                  </RecentBranch>
+                </list>
+              </option>
+              <option name="repositoryRootUrl" value="file://$PROJECT_DIR$" />
+            </RecentBranchesForRepo>
+          </list>
+        </option>
+      </RecentBranches>
+    </option>
+  </component>
   <component name="ProjectId" id="1hzLp3LvPZpjOLSoqpFiJCnmQUx" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -49,11 +72,14 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="RunOnceActivity.cidr.known.project.marker" value="true" />
+    <property name="cidr.known.project.marker" value="true" />
     <property name="dart.analysis.tool.window.force.activate" value="false" />
     <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/ios/Classes" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -71,6 +97,7 @@
       <method v="2" />
     </configuration>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -124,7 +151,14 @@
       <option name="project" value="LOCAL" />
       <updated>1614868036804</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="feat(partially): migrate to v2">
+      <created>1656798685977</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1656798685977</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -147,45 +181,8 @@
     <MESSAGE value="(feature) getIconString" />
     <MESSAGE value="(feature) modify read and write functions" />
     <MESSAGE value="(fix) return 'null' value iOS" />
-    <option name="LAST_COMMIT_MESSAGE" value="(fix) return 'null' value iOS" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state width="1398" height="18" key="GridCell.Tab.0.bottom" timestamp="1614261626730">
-      <screen x="0" y="25" width="1440" height="875" />
-    </state>
-    <state width="1398" height="117" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1613686920902" />
-    <state width="1398" height="18" key="GridCell.Tab.0.bottom/0.25.1440.875@0.25.1440.875" timestamp="1614261626730" />
-    <state width="1398" height="18" key="GridCell.Tab.0.center" timestamp="1614261626729">
-      <screen x="0" y="25" width="1440" height="875" />
-    </state>
-    <state width="1398" height="117" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1613686920901" />
-    <state width="1398" height="18" key="GridCell.Tab.0.center/0.25.1440.875@0.25.1440.875" timestamp="1614261626729" />
-    <state width="1398" height="18" key="GridCell.Tab.0.left" timestamp="1614261626729">
-      <screen x="0" y="25" width="1440" height="875" />
-    </state>
-    <state width="1398" height="117" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1613686920901" />
-    <state width="1398" height="18" key="GridCell.Tab.0.left/0.25.1440.875@0.25.1440.875" timestamp="1614261626729" />
-    <state width="1398" height="18" key="GridCell.Tab.0.right" timestamp="1614261626730">
-      <screen x="0" y="25" width="1440" height="875" />
-    </state>
-    <state width="1398" height="117" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1613686920902" />
-    <state width="1398" height="18" key="GridCell.Tab.0.right/0.25.1440.875@0.25.1440.875" timestamp="1614261626730" />
-    <state x="0" y="28" width="1395" height="872" key="Vcs.Push.Dialog.v2" timestamp="1608824691895">
-      <screen x="0" y="0" width="1440" height="900" />
-    </state>
-    <state x="0" y="28" width="1395" height="872" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1608824691895" />
-    <state x="412" y="205" width="885" height="490" key="find.popup" timestamp="1608732763322">
-      <screen x="0" y="0" width="1440" height="900" />
-    </state>
-    <state x="412" y="205" width="885" height="490" key="find.popup/0.0.1440.900@0.0.1440.900" timestamp="1608732763322" />
-    <state x="331" y="325" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1614889205860">
-      <screen x="0" y="25" width="1440" height="875" />
-    </state>
-    <state x="331" y="325" key="git4idea.remote.GitConfigureRemotesDialog/0.25.1440.875@0.25.1440.875" timestamp="1614889205860" />
-    <state x="385" y="110" width="670" height="676" key="search.everywhere.popup" timestamp="1614261472279">
-      <screen x="0" y="25" width="1440" height="875" />
-    </state>
-    <state x="385" y="110" width="670" height="676" key="search.everywhere.popup/0.25.1440.875@0.25.1440.875" timestamp="1614261472279" />
+    <MESSAGE value="feat(partially): migrate to v2" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(partially): migrate to v2" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -194,26 +191,6 @@
           <url>file://$PROJECT_DIR$/example/lib/main.dart</url>
           <line>95</line>
           <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/android/src/main/kotlin/com/pacificoseguros/securitystorage/security_storage/SecurityStoragePlugin.kt</url>
-          <line>261</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/android/src/main/kotlin/com/pacificoseguros/securitystorage/security_storage/SecurityStoragePlugin.kt</url>
-          <line>268</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/android/src/main/kotlin/com/pacificoseguros/securitystorage/security_storage/SecurityStoragePlugin.kt</url>
-          <line>273</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/android/src/main/kotlin/com/pacificoseguros/securitystorage/security_storage/SecurityStoragePlugin.kt</url>
-          <line>150</line>
-          <option name="timeStamp" value="5" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
