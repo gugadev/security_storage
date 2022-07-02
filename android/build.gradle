@@ -32,10 +32,12 @@ android {
         main.java.srcDirs += 'src/main/kotlin'
     }
     defaultConfig {
+        applicationId "pe.com.pacifico.securitystorage"
         minSdkVersion 23
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'proguard.pro'
+        manifestPlaceholders = [applicationName: "@string/applicationName"]
     }
     lintOptions {
         disable 'InvalidPackage'
