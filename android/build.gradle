@@ -37,7 +37,18 @@ android {
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'proguard.pro'
-        manifestPlaceholders = [applicationName: "@string/applicationName"]
+        manifestPlaceholders = [applicationName: "@string/application_name"]
+    }
+    buildTypes {
+        debug {
+            manifestPlaceholders = [applicationName: "@string/application_name"]
+        }
+        release {
+            manifestPlaceholders = [applicationName: "@string/application_name"]
+        }
+        build {
+            manifestPlaceholders = [applicationName: "@string/application_name"]
+        }
     }
     lintOptions {
         disable 'InvalidPackage'
