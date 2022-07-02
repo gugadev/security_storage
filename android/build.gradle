@@ -37,17 +37,17 @@ android {
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'proguard.pro'
-        manifestPlaceholders = [applicationName: "@string/application_name"]
+        manifestPlaceholders = [applicationName: "pe.com.pacifico.securitystorage"]
     }
     buildTypes {
         debug {
-            manifestPlaceholders = [applicationName: "@string/application_name"]
+            manifestPlaceholders = [applicationName: "pe.com.pacifico.securitystorage"]
         }
         release {
-            manifestPlaceholders = [applicationName: "@string/application_name"]
+            manifestPlaceholders = [applicationName: "pe.com.pacifico.securitystorage"]
         }
         build {
-            manifestPlaceholders = [applicationName: "@string/application_name"]
+            manifestPlaceholders = [applicationName: "pe.com.pacifico.securitystorage"]
         }
     }
     lintOptions {
