@@ -22,7 +22,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2600a4d6-f608-408c-8001-622e5b12bcbf" name="Default Changelist" comment="(feature) fix log of options" />
+    <list default="true" id="2600a4d6-f608-408c-8001-622e5b12bcbf" name="Default Changelist" comment="(feature) fix log of options">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -36,6 +38,9 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="ROOT_SYNC" value="SYNC" />
+  </component>
+  <component name="GitToolBoxStore">
+    <option name="projectConfigVersion" value="5" />
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/lib/security_storage.dart" root0="SKIP_INSPECTION" />
@@ -192,22 +197,22 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
           <url>file://$PROJECT_DIR$/android/src/main/kotlin/com/pacificoseguros/securitystorage/security_storage/SecurityStoragePlugin.kt</url>
-          <line>261</line>
+          <line>279</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
           <url>file://$PROJECT_DIR$/android/src/main/kotlin/com/pacificoseguros/securitystorage/security_storage/SecurityStoragePlugin.kt</url>
-          <line>268</line>
+          <line>286</line>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
           <url>file://$PROJECT_DIR$/android/src/main/kotlin/com/pacificoseguros/securitystorage/security_storage/SecurityStoragePlugin.kt</url>
-          <line>273</line>
+          <line>291</line>
           <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
           <url>file://$PROJECT_DIR$/android/src/main/kotlin/com/pacificoseguros/securitystorage/security_storage/SecurityStoragePlugin.kt</url>
-          <line>150</line>
+          <line>168</line>
           <option name="timeStamp" value="5" />
         </line-breakpoint>
       </breakpoints>

@@ -18,7 +18,6 @@
 -keepclassmembers class kotlin.Metadata {
     public <methods>;
 }
-
 -keepclassmembers class ** {
     @com.squareup.moshi.FromJson *;
     @com.squareup.moshi.ToJson *;
