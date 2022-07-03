@@ -115,7 +115,7 @@ public class SecurityStoragePlugin : FlutterPlugin, MethodCallHandler, ActivityA
             "init" -> {
                 var rawOptions = call.argument<Map<String, Any>>("options")
 
-                if (!rawOptions) {
+                rawOptions?.let {
                     rawOptions = emptyMap<String, Any>()
                 }
 
