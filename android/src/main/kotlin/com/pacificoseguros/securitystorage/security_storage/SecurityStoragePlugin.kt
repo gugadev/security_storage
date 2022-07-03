@@ -77,7 +77,7 @@ public class SecurityStoragePlugin : FlutterPlugin, MethodCallHandler, ActivityA
         private val handler: Handler = Handler(Looper.getMainLooper())
         private const val TAG = "SecurityStoragePlugin"
         val moshi = Moshi.Builder()
-                // .addLast(KotlinJsonAdapterFactory())
+                .addLast(KotlinJsonAdapterFactory())
                 .build() as Moshi
         const val PARAM_ANDROID_PROMPT_INFO = "androidPromptInfo"
         const val PARAM_NAME = "name"
