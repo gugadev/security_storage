@@ -133,7 +133,7 @@ public class SecurityStoragePlugin : FlutterPlugin, MethodCallHandler, ActivityA
                     )
                 }
 
-                Log.d(TAG, "Options created: ${options.toJson()}")
+                // Log.d(TAG, "Options created: ${options.toJson()}")
                 
                 storageItems[getName()] = StorageItem(getName(), options)
 
