@@ -113,7 +113,7 @@ public class SecurityStoragePlugin : FlutterPlugin, MethodCallHandler, ActivityA
             "canAuthenticate" -> result.success(canAuthenticate().toString())
             "getPlatformVersion" -> result.success("test Android ${android.os.Build.VERSION.RELEASE}")
             "init" -> {
-                Log.d(TAG, "InitOptions received: ${call.argument("options")}")
+                Log.d(TAG, "InitOptions received: ${call.argument<Map<String, Any>>("options").entries.joinToString()}")
                 val options = moshi.adapter<InitOptions>(InitOptions::class.java)
                         .fromJsonValue(call.argument("options") ?: emptyMap<String, Any>())
                         ?: InitOptions()
