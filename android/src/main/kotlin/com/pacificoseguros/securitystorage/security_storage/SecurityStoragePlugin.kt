@@ -113,19 +113,15 @@ public class SecurityStoragePlugin : FlutterPlugin, MethodCallHandler, ActivityA
             "canAuthenticate" -> result.success(canAuthenticate().toString())
             "getPlatformVersion" -> result.success("test Android ${android.os.Build.VERSION.RELEASE}")
             "init" -> {
-                var rawOptions = call.argument<Map<String, Any>>("options")
-
-                rawOptions?.let {
-                    rawOptions = emptyMap<String, Any>()
-                }
-
+                val rawOptions = call.argument<Map<String, Any>>("options") ?: emptyMap<String, Any>()
                 var options = InitOptions()
                 Log.d(TAG, "InitOptions received: ${rawOptions.entries.joinToString()}")
+                
                 try {
                     options = moshi.adapter<InitOptions>(InitOptions::class.java)
                         .fromJsonValue(rawOptions)
                         ?: InitOptions()
-                } catch(e: Throwable) {
+                } catch (e: Throwable) {
                     Log.d(TAG, "Ocurrió un error al tratar de instanciar InitOption: ${e.stackTraceToString()}")
                     options = InitOptions(
                         authenticationValidityDurationSeconds = rawOptions["authenticationValidityDurationSeconds"].toString().toInt(),
