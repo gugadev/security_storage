@@ -14,7 +14,6 @@ import com.google.gson.Gson
 import com.pacificoseguros.securitystorage.security_storage.PreferenceHelper.get
 import com.pacificoseguros.securitystorage.security_storage.PreferenceHelper.set
 import com.squareup.moshi.*
-import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
