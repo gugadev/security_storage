@@ -13,8 +13,7 @@ import androidx.fragment.app.FragmentActivity
 import com.google.gson.Gson
 import com.pacificoseguros.securitystorage.security_storage.PreferenceHelper.get
 import com.pacificoseguros.securitystorage.security_storage.PreferenceHelper.set
-import com.squareup.moshi.JsonClass
-import com.squareup.moshi.Moshi
+import com.squareup.moshi.*
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.embedding.engine.plugins.activity.ActivityAware

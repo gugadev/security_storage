@@ -4,7 +4,7 @@ import android.security.keystore.KeyGenParameterSpec
 import android.security.keystore.KeyPermanentlyInvalidatedException
 import android.security.keystore.KeyProperties
 import android.util.Log
-import com.squareup.moshi.JsonClass
+import com.squareup.moshi.*
 import java.lang.Exception
 import java.nio.charset.Charset
 import java.security.InvalidAlgorithmParameterException
