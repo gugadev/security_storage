@@ -122,12 +122,18 @@ public class SecurityStoragePlugin : FlutterPlugin, MethodCallHandler, ActivityA
                         .fromJsonValue(rawOptions)
                         ?: InitOptions()
                 } catch (e: Throwable) {
+                    val authenticationValidityDurationSeconds = rawOptions["authenticationValidityDurationSeconds"]
+                    val authenticationRequired = rawOptions["authenticationRequired"]
                     Log.d(TAG, "Ocurrió un error al tratar de instanciar InitOption: ${e.stackTraceToString()}")
+                    Log.d(TAG, "authenticationValidityDurationSeconds: ${authenticationValidityDurationSeconds.javaClass.name}")
+                    Log.d(TAG, "authenticationRequired: ${authenticationRequired.javaClass.name}")
                     options = InitOptions(
-                        authenticationValidityDurationSeconds = rawOptions["authenticationValidityDurationSeconds"].toString().toInt(),
-                        authenticationRequired = rawOptions["authenticationRequired"].toString().toBoolean()
+                        authenticationValidityDurationSeconds = authenticationValidityDurationSeconds.toString().toInt(),
+                        authenticationRequired = authenticationRequired.toString().toBoolean()
                     )
                 }
+
+                Log.d(TAG, "Options created: ${options.toJson()}")
                 
                 storageItems[getName()] = StorageItem(getName(), options)
 
