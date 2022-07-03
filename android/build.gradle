@@ -27,13 +27,13 @@ apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 31
-    targetSdkVersion 31
 
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
     defaultConfig {
         minSdkVersion 23
+        targetSdkVersion 31
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'proguard.pro'
