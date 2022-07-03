@@ -23,7 +23,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2600a4d6-f608-408c-8001-622e5b12bcbf" name="Default Changelist" comment="feat(partially): add applicationId and applicationName">
-      <change beforePath="$PROJECT_DIR$/android/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/android/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/com/pacificoseguros/securitystorage/security_storage/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/pacificoseguros/securitystorage/security_storage/MainActivity.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,6 +65,17 @@
         </option>
       </RecentBranches>
     </option>
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/android/src/main/res/values/strings.xml" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/lib/security_storage.dart" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/android/src/main/kotlin/com/pacificoseguros/securitystorage/security_storage/MainActivity.kt" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/android/build.gradle" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/pubspec.lock" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/android/src/main/kotlin/com/pacificoseguros/securitystorage/security_storage/SecurityStoragePlugin.kt" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/android/src/main/kotlin/com/pacificoseguros/securitystorage/security_storage/CryptographyManager.kt" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/android/src/main/AndroidManifest.xml" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/android/proguard.pro" root0="SKIP_INSPECTION" />
   </component>
   <component name="ProjectId" id="1hzLp3LvPZpjOLSoqpFiJCnmQUx" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -219,7 +232,14 @@
       <option name="project" value="LOCAL" />
       <updated>1656806564529</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="feat(partially): add applicationId and applicationName">
+      <created>1656806701035</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1656806701035</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
