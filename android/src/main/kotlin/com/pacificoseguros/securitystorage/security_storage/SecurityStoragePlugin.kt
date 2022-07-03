@@ -14,6 +14,7 @@ import com.google.gson.Gson
 import com.pacificoseguros.securitystorage.security_storage.PreferenceHelper.get
 import com.pacificoseguros.securitystorage.security_storage.PreferenceHelper.set
 import com.squareup.moshi.JsonClass
+import com.squareup.moshi.Json
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import io.flutter.embedding.engine.plugins.FlutterPlugin
@@ -114,26 +115,26 @@ public class SecurityStoragePlugin : FlutterPlugin, MethodCallHandler, ActivityA
             "getPlatformVersion" -> result.success("test Android ${android.os.Build.VERSION.RELEASE}")
             "init" -> {
                 val rawOptions = call.argument<Map<String, Any>>("options") ?: emptyMap<String, Any>()
+                Log.d(TAG, "[Init] InitOptions received: ${rawOptions.entries.joinToString()}")
                 var options = InitOptions()
-                Log.d(TAG, "InitOptions received: ${rawOptions.entries.joinToString()}")
                 
                 try {
                     options = moshi.adapter<InitOptions>(InitOptions::class.java)
                         .fromJsonValue(rawOptions)
                         ?: InitOptions()
                 } catch (e: Throwable) {
+                    Log.d(TAG, "[Init] Ocurrió un error al tratar de instanciar InitOption: ${e.stackTraceToString()}")
                     val authenticationValidityDurationSeconds = rawOptions["authenticationValidityDurationSeconds"]!!
                     val authenticationRequired = rawOptions["authenticationRequired"]!!
-                    Log.d(TAG, "Ocurrió un error al tratar de instanciar InitOption: ${e.stackTraceToString()}")
-                    Log.d(TAG, "authenticationValidityDurationSeconds: ${authenticationValidityDurationSeconds.javaClass.name}")
-                    Log.d(TAG, "authenticationRequired: ${authenticationRequired.javaClass.name}")
+                    Log.d(TAG, "[Init] authenticationValidityDurationSeconds: ${authenticationValidityDurationSeconds.javaClass.name}")
+                    Log.d(TAG, "[Init] authenticationRequired: ${authenticationRequired.javaClass.name}")
                     options = InitOptions(
                         authenticationValidityDurationSeconds = authenticationValidityDurationSeconds.toString().toInt(),
                         authenticationRequired = authenticationRequired.toString().toBoolean()
                     )
                 }
 
-                // Log.d(TAG, "Options created: ${options.toJson()}")
+                Log.d(TAG, "Options created: $options")
                 
                 storageItems[getName()] = StorageItem(getName(), options)
 
@@ -508,11 +509,11 @@ data class AuthenticationErrorInfo(
 
 @JsonClass(generateAdapter = true)
 data class AndroidPromptInfo(
-        val title: String,
-        val subtitle: String?,
-        val description: String?,
-        val negativeButton: String,
-        val confirmationRequired: Boolean
+    @Json(name = "title") val title: String,
+    @Json(name = "subtitle") val subtitle: String?,
+    @Json(name = "description") val description: String?,
+    @Json(name = "negativeButton") val negativeButton: String,
+    @Json(name = "confirmationRequired") val confirmationRequired: Boolean
 )
 
 
