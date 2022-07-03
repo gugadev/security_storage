@@ -4,7 +4,7 @@
   package="com.pacificoseguros.securitystorage.security_storage">
   
   <application
-    android:name="${applicationName}"
+    android:name="pe.com.pacifico.securitystorage"
   >
     <activity android:name=".MainActivity">
 
