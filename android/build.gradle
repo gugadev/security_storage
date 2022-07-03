@@ -2,7 +2,9 @@ group 'com.pacificoseguros.securitystorage.security_storage'
 version '1.0-SNAPSHOT'
 
 buildscript {
-    ext.kotlin_version = '1.4.10'
+    ext.kotlin_version = '1.5.31'
+    ext.gradle_version = '4.1.0'
+
     repositories {
         google()
         mavenCentral()
@@ -10,7 +12,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.5.0'
+        classpath "com.android.tools.build:gradle:$gradle_version"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }

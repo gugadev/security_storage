@@ -138,7 +138,7 @@ class SecurityStorage {
     AndroidPromptInfo androidPromptInfo = AndroidPromptInfo.defaultValues,
   }) async {
     try {
-      _channel.invokeMethod<bool>(
+      await _channel.invokeMethod<bool>(
         'init',
         {
           'name': name,
