@@ -4,7 +4,7 @@ import android.security.keystore.KeyGenParameterSpec
 import android.security.keystore.KeyPermanentlyInvalidatedException
 import android.security.keystore.KeyProperties
 import android.util.Log
-import com.squareup.moshi.*
+//import com.squareup.moshi.*
 import java.lang.Exception
 import java.nio.charset.Charset
 import java.security.InvalidAlgorithmParameterException
@@ -15,7 +15,7 @@ import javax.crypto.SecretKey
 import javax.crypto.spec.GCMParameterSpec
 
 
-@JsonClass(generateAdapter = true)
+//@JsonClass(generateAdapter = true)
 data class InitOptions(
         val authenticationValidityDurationSeconds: Int = 30,
         val authenticationRequired: Boolean = true

@@ -13,7 +13,8 @@ import androidx.fragment.app.FragmentActivity
 import com.google.gson.Gson
 import com.pacificoseguros.securitystorage.security_storage.PreferenceHelper.get
 import com.pacificoseguros.securitystorage.security_storage.PreferenceHelper.set
-import com.squareup.moshi.*
+//import com.squareup.moshi.Moshi
+//import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
@@ -73,9 +74,9 @@ public class SecurityStoragePlugin : FlutterPlugin, MethodCallHandler, ActivityA
         val executor: ExecutorService = Executors.newSingleThreadExecutor()
         private val handler: Handler = Handler(Looper.getMainLooper())
         private const val TAG = "SecurityStoragePlugin"
-        val moshi = Moshi.Builder()
-                .add(KotlinJsonAdapterFactory())
-                .build() as Moshi
+//        val moshi = Moshi.Builder()
+//                .add(KotlinJsonAdapterFactory())
+//                .build() as Moshi
         const val PARAM_ANDROID_PROMPT_INFO = "androidPromptInfo"
         const val PARAM_NAME = "name"
         const val PARAM_WRITE_CONTENT = "content"
@@ -91,12 +92,17 @@ public class SecurityStoragePlugin : FlutterPlugin, MethodCallHandler, ActivityA
                 )
 
         val getAndroidPromptInfo = {
+            val gson = Gson()
             requiredArgument<Map<String, Any>>(PARAM_ANDROID_PROMPT_INFO).let {
-                moshi.adapter(AndroidPromptInfo::class.java).fromJsonValue(it)
-                        ?: throw MethodCallException(
-                                "BadArgument",
-                                "'$PARAM_ANDROID_PROMPT_INFO' is not well formed"
-                        )
+                gson.fromJson(it ?: "{}", AndroidPromptInfo::class.java) ?: throw MethodCallException(
+                    "BadArgument",
+                    "'$PARAM_ANDROID_PROMPT_INFO' is not well formed"
+                )
+//                moshi.adapter(AndroidPromptInfo::class.java).fromJsonValue(it)
+//                        ?: throw MethodCallException(
+//                                "BadArgument",
+//                                "'$PARAM_ANDROID_PROMPT_INFO' is not well formed"
+//                        )
             }
         }
         val getName = { requiredArgument<String>(PARAM_NAME) }
@@ -113,15 +119,15 @@ public class SecurityStoragePlugin : FlutterPlugin, MethodCallHandler, ActivityA
             "init" -> {
 
                 try {
-                    val options = moshi.adapter<InitOptions>(InitOptions::class.java)
-                        .fromJsonValue(call.argument("options") ?: emptyMap<String, Any>())
-                        ?: InitOptions()
-
+                    val gson = Gson()
+//                    val options = moshi.adapter<InitOptions>(InitOptions::class.java)
+//                        .fromJsonValue(call.argument("options") ?: emptyMap<String, Any>())
+//                        ?: InitOptions()
+                    val options = gson.fromJson(call.argument("options") ?: emptyMap<String, Any>().toString(), InitOptions::class.java)
                     storageItems[getName()] = StorageItem(getName(), options)
 
                     var prefs = PreferenceHelper.customPrefs(this.context, "security-storage")
                     val json: String = prefs[getName()]
-                    val gson = Gson()
                     storageItems[getName()]!!.encryptedData = gson.fromJson(json, EncryptedData::class.java)
                 } catch (e: Throwable) {
                     Log.e(TAG, "Ocurrión un error al inicializar el storage: ${e.message}")
@@ -493,7 +499,7 @@ data class AuthenticationErrorInfo(
     ) : this(error, message, e.toString())
 }
 
-@JsonClass(generateAdapter = true)
+//@JsonClass(generateAdapter = true)
 data class AndroidPromptInfo(
         val title: String,
         val subtitle: String?,
