@@ -22,7 +22,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2600a4d6-f608-408c-8001-622e5b12bcbf" name="Default Changelist" comment="(feature) improve code">
+    <list default="true" id="2600a4d6-f608-408c-8001-622e5b12bcbf" name="Default Changelist" comment="(feature) fix log of options">
       <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/com/pacificoseguros/securitystorage/security_storage/SecurityStoragePlugin.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/kotlin/com/pacificoseguros/securitystorage/security_storage/SecurityStoragePlugin.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -132,7 +132,21 @@
       <option name="project" value="LOCAL" />
       <updated>1656818097515</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="(feature) fix log of options">
+      <created>1656818752606</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1656818752606</updated>
+    </task>
+    <task id="LOCAL-00009" summary="(feature) fix log of options">
+      <created>1656818881647</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1656818881647</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -156,7 +170,8 @@
     <MESSAGE value="(feature) modify read and write functions" />
     <MESSAGE value="(fix) return 'null' value iOS" />
     <MESSAGE value="(feature) improve code" />
-    <option name="LAST_COMMIT_MESSAGE" value="(feature) improve code" />
+    <MESSAGE value="(feature) fix log of options" />
+    <option name="LAST_COMMIT_MESSAGE" value="(feature) fix log of options" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
