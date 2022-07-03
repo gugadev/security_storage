@@ -113,11 +113,21 @@ public class SecurityStoragePlugin : FlutterPlugin, MethodCallHandler, ActivityA
             "canAuthenticate" -> result.success(canAuthenticate().toString())
             "getPlatformVersion" -> result.success("test Android ${android.os.Build.VERSION.RELEASE}")
             "init" -> {
-                Log.d(TAG, "InitOptions received: ${call.argument<Map<String, Any>>("options")?.entries?.joinToString()}")
-                val options = moshi.adapter<InitOptions>(InitOptions::class.java)
-                        .fromJsonValue(call.argument("options") ?: emptyMap<String, Any>())
+                var rawOptions = call.argument<Map<String, Any>>("options")
+                var options = InitOptions()
+                Log.d(TAG, "InitOptions received: ${rawOptions?.entries?.joinToString()}")
+                try {
+                    options = moshi.adapter<InitOptions>(InitOptions::class.java)
+                        .fromJsonValue(rawOptions ?: emptyMap<String, Any>())
                         ?: InitOptions()
-
+                } catch(e: Throwable) {
+                    Log.d(TAG, "Ocurrió un error al tratar de instanciar InitOption: ${e.stackTraceToString()}")
+                    options = InitOptions(
+                        authenticationValidityDurationSeconds = rawOptions["authenticationValidityDurationSeconds"].toString().toInt(),
+                        authenticationRequired = rawOptions["authenticationRequired"].toString().toBoolean()
+                    )
+                }
+                
                 storageItems[getName()] = StorageItem(getName(), options)
 
                 var prefs = PreferenceHelper.customPrefs(this.context, "security-storage")
