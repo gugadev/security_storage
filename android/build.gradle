@@ -26,7 +26,8 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 31
+    targetSdkVersion 31
 
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
