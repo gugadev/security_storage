@@ -18,8 +18,8 @@ import javax.crypto.spec.GCMParameterSpec
 
 @JsonClass(generateAdapter = true)
 data class InitOptions(
-    @field:Json(name = "authenticationValidityDurationSeconds") var authenticationValidityDurationSeconds: Int = 30,
-    @field:Json(name = "authenticationRequired") var authenticationRequired: Boolean = true
+    val authenticationValidityDurationSeconds: Int = 30,
+    val authenticationRequired: Boolean = true
 )
 
 interface CryptographyManager {

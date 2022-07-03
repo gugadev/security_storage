@@ -77,7 +77,7 @@ public class SecurityStoragePlugin : FlutterPlugin, MethodCallHandler, ActivityA
         private val handler: Handler = Handler(Looper.getMainLooper())
         private const val TAG = "SecurityStoragePlugin"
         val moshi = Moshi.Builder()
-                .add(KotlinJsonAdapterFactory())
+                .addLast(KotlinJsonAdapterFactory())
                 .build() as Moshi
         const val PARAM_ANDROID_PROMPT_INFO = "androidPromptInfo"
         const val PARAM_NAME = "name"
@@ -509,11 +509,11 @@ data class AuthenticationErrorInfo(
 
 @JsonClass(generateAdapter = true)
 data class AndroidPromptInfo(
-    @Json(name = "title") val title: String,
-    @Json(name = "subtitle") val subtitle: String?,
-    @Json(name = "description") val description: String?,
-    @Json(name = "negativeButton") val negativeButton: String,
-    @Json(name = "confirmationRequired") val confirmationRequired: Boolean
+    val title: String,
+    val subtitle: String?,
+    val description: String?,
+    val negativeButton: String,
+    val confirmationRequired: Boolean
 )
 
 
